@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Style from './Searchbar.module.css';
-import { BsSearch } from "react-icons/bs";
+import { BsSearch } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
 
 export default class Searchbar extends Component {
@@ -15,8 +16,12 @@ export default class Searchbar extends Component {
   }; 
 
     handleSubmit = e => {
-    e.preventDefault();
-    const { SearchValue } = this.state;
+      e.preventDefault();
+      const { SearchValue } = this.state;
+      if (SearchValue.trim() === '') {
+        return toast.warn('Enter any data for searh');
+      }
+    
     this.props.onSubmit(SearchValue);
     this.reset();
     };
