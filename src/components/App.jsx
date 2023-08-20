@@ -10,11 +10,13 @@ export class App extends Component {
   state = {
     ShowModal: false,
     SearchValue: '',
+    LargeImg: '',
   }
-
-  toggleModal = () => {
+  
+  toggleModal = largeImage => {
     this.setState(({ ShowModal }) => ({
       ShowModal: !ShowModal,
+      LargeImg: largeImage,
     }))
    }
 
@@ -22,11 +24,11 @@ onSubmitForm = Value => {
   this.setState({ SearchValue: Value });
 };
   render() {
-    //const { ShowModal } = this.state;
+    const { ShowModal, LargeImg } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.onSubmitForm} />
-        {this.state.ShowModal && <Modal onClose={this.toggleModal} />}
+        {ShowModal && <Modal onClose={this.toggleModal} largeImageURL={LargeImg} />}
         <ImageGallery SearchValue={this.state.SearchValue} onClick={this.toggleModal} />
         <ToastContainer onClose={3000} />
       </>
