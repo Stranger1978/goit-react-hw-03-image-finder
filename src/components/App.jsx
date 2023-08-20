@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import { Modal } from './Modal';
 import { Searchbar } from './Searchbar';
 import { ImageGallery } from './ImageGallery';
-//import { ImageGaleryItem } from './ImageGaleryItem';
 import 'react-toastify/dist/ReactToastify.css';
 
 export class App extends Component {
@@ -11,7 +10,6 @@ export class App extends Component {
     ShowModal: false,
     SearchValue: '',
     LargeImg: '',
-    
   }
   
   toggleModal = largeImage => {
@@ -20,8 +18,6 @@ export class App extends Component {
       LargeImg: largeImage,
     }))
    }
-
-
   
   onSubmitForm = Value => {
     this.setState({ SearchValue: Value });

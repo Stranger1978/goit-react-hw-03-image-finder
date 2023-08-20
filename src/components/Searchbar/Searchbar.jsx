@@ -9,7 +9,7 @@ export class Searchbar extends Component {
   state = {
         SearchValue: '',
     }
-
+  
   handleChange = e => {
     const { value } = e.currentTarget;
     this.setState({ SearchValue: value });
@@ -19,11 +19,11 @@ export class Searchbar extends Component {
       e.preventDefault();
       const { SearchValue } = this.state;
       if (SearchValue.trim() === '') {
-        return toast.warn('Enter any data for searh');
+        return toast.warn('Enter new data for searh');
       }
-    
-    this.props.onSubmit(SearchValue);
-    this.reset();
+      
+      this.props.onSubmit(SearchValue);
+      this.reset();
     };
     
     reset = () => {

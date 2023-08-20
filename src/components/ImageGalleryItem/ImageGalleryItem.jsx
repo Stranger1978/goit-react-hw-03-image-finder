@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Style from './ImageGalleryItem.module.css';
 
-
 export const ImageGalleryItem = ({ image, onClick }) => { 
   const { webformatURL, tags, largeImageURL } = image;
   return (
@@ -11,13 +10,11 @@ export const ImageGalleryItem = ({ image, onClick }) => {
   </li>
 )};
 
-
 ImageGalleryItem.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
+  image: PropTypes.shape({
       webformatURL: PropTypes.string.isRequired,
       tags: PropTypes.string.isRequired,
-    })
-  ),
+      largeImageURL: PropTypes.string.isRequired,
+    }),
   onClick: PropTypes.func.isRequired,
 };

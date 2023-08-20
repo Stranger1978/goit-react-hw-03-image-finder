@@ -5,6 +5,7 @@ import { ImageGalleryItem } from '../ImageGalleryItem';
 import Style from './ImageGallery.module.css';
 import { Loader } from '../Loader';
 import { Button } from '../Button';
+import PropTypes from 'prop-types';
 
 export class ImageGallery extends Component { 
     state = { 
@@ -27,17 +28,16 @@ export class ImageGallery extends Component {
     fetchArticles = () => {
         const { SearchValue } = this.props;
         const { page, per_page } = this.state;
-    setTimeout (() => {
+   
         ImageApi.ImageApiService(SearchValue, page, per_page)
             .then(({ hits, totalHits }) => {
                 if (totalHits === 0) {
                     this.setState({isLoading: false});
                     return toast('Sorry, there are no images matching your search query. Please try again.');
                 }
-                if (this.page === 1) {
+                if (page === 1) {
                 toast(`Hooray! We found ${totalHits} images.`);    
                 }
-                
                 this.setState(prevState => ({
                     images: [...prevState.images, ...hits],
                     page: prevState.page +1,
@@ -45,16 +45,8 @@ export class ImageGallery extends Component {
                     isLoading: false,
                 }));
             })
-}, 3000);
      }
-   
-  
-        //    if (per_page < total_hits) {
-        //       this.setState(isLoadMore: false);    
-        //    }  {isLoading && <Loader />}
-        
        
-
     render() { 
         const { onClick } = this.props; 
         const { images, isLoadMore, isLoading } = this.state;
@@ -75,3 +67,10 @@ export class ImageGallery extends Component {
         }
     };
 
+ImageGallery.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    SearchValue: PropTypes.string.isRequired,
+    image: PropTypes.shape({
+        id: PropTypes.object.isRequired
+    }),
+};
