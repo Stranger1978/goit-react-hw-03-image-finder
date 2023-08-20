@@ -24,7 +24,9 @@ export class ImageGallery extends Component {
             this.fetchArticles(SearchValue, page, per_page);
         }
     }  
-    fetchArticles = (SearchValue, page, per_page) => {
+    fetchArticles = () => {
+        const { SearchValue } = this.props;
+        const { page, per_page } = this.state;
     setTimeout (() => {
         ImageApi.ImageApiService(SearchValue, page, per_page)
             .then(({ hits, totalHits }) => {
