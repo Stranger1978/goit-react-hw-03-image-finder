@@ -7,27 +7,27 @@ import PropTypes from 'prop-types';
 
 export class Searchbar extends Component {
   state = {
-        SearchValue: '',
+        searchValue: '',
     }
   
   handleChange = e => {
     const { value } = e.currentTarget;
-    this.setState({ SearchValue: value });
+    this.setState({ searchValue: value });
   }; 
 
     handleSubmit = e => {
       e.preventDefault();
-      const { SearchValue } = this.state;
-      if (SearchValue.trim() === '') {
+      const { searchValue } = this.state;
+      if (searchValue.trim() === '') {
         return toast.warn('Enter new data for searh');
       }
       
-      this.props.onSubmit(SearchValue);
+      this.props.onSubmit(searchValue);
       this.reset();
     };
     
     reset = () => {
-    this.setState({SearchValue: ''});
+    this.setState({searchValue: ''});
     };
 
   render() {
@@ -44,6 +44,7 @@ export class Searchbar extends Component {
           type="text"
           //autocomplete="off"
           //autofocus
+          //  value={this.state.searchValue}
             placeholder="Search images and photos"
             onChange={this.handleChange}
         />

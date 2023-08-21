@@ -4,10 +4,11 @@ const refs = {
     IMAGE_TYPE: 'photo',
     ORIENTATION: 'horizontal',
     SAFESEARCH: 'true',
+    PER_PAGE: '12',
 };
 
-export const ImageApiService = (SearchValue, page, per_page) => {
-    return fetch(`${refs.MAIN_URL}?key=${refs.API_KEY}&q=${SearchValue}&image_type=${refs.IMAGE_TYPE}&orientation=${refs.ORIENTATION}&safesearch=${refs.SAFESEARCH}&page=${page}&per_page=${per_page}`)
+export const ImageApiService = (searchValue, page) => {
+    return fetch(`${refs.MAIN_URL}?key=${refs.API_KEY}&q=${searchValue}&image_type=${refs.IMAGE_TYPE}&orientation=${refs.ORIENTATION}&safesearch=${refs.SAFESEARCH}&page=${page}&per_page=${refs.PER_PAGE}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.status);
