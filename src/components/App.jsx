@@ -22,7 +22,7 @@ export class App extends Component {
   componentDidUpdate(_, prevState) { 
         const { page, searchValue } = this.state;
 
-    if (prevState.searchValue !== searchValue) { 
+    if (prevState.searchValue !== searchValue || prevState.page !== page) { 
           this.setState({isLoading: true});
           this.fetchArticles(searchValue, page);
         }
@@ -53,14 +53,19 @@ export class App extends Component {
             }
             this.setState(prevState => ({
               images: [...prevState.images, ...hits],
-              page: prevState.page +1,
               isLoadMore: page < Math.ceil(totalHits / per_page),
             }))
             }).finally(() => {
               this.setState({ isLoading: false });
       });
      }
-
+  
+  onLoadMore = () => { 
+    this.setState(prevState => ({
+      page: prevState.page +1,
+    }))
+  }
+     
   render() {
     const { showModal, largeImg, images, isLoadMore, isLoading } = this.state;
     return (
@@ -74,7 +79,7 @@ export class App extends Component {
         <Searchbar onSubmit={this.onSubmitForm} />
         {showModal && <Modal onClose={this.toggleModal} largeImageURL={largeImg} />}
         {images && <ImageGallery images={this.state.images} onClick={this.toggleModal} />}
-        {isLoadMore &&  <Button onClick={this.fetchArticles} />}
+        {isLoadMore &&  <Button onClick={this.onLoadMore} />}
         {isLoading && <Loader />}
         <ToastContainer onClose={3000} />
       </div>
